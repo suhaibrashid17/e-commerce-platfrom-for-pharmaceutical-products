@@ -1,1 +1,5 @@
-
+Download and Setup xampp.
+In phpmyadmin create a database named "e_comm_pharma"
+go to "sql" and paste the queries from file "e_comm_pharma.sql"
+put the "e_pharm.com" folder in htdocs.
+Here you go! you're all set up!
