@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Admin Signin</title>
+            <link rel="stylesheet" href="Dashboard.css">
+            <link rel="stylesheet" href="e_com.css">
+            <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+            <link rel="stylesheet" href="fontawesome-free-6.3.0-web/css/all.css">
+        
+            <script src="e_com.js"></script>
+            <script src="jquery.js"></script>
+            <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+        
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           
+        </head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navigationBars bg-dark text-light">
+        <img src="site-images/logo.png" alt="center" class="logo">
+       
+    </nav>
+
+    <h1 class="py-3">Admin's Terminal</h1>
+    <br><br>
+    <div>
+        <div class="d-flex flex-md-row flex-column justify-content-evenly ">
+            <div class="mr-auto p-2">
+                <img src="site-images/admin.jpg"  style="width: 22.1em;">
+            </div>
+            <div class="p-2 ">
+                <p class="justify-content-center">Sign in</p>
+                <form >
+                    <div class="alert alert-danger" role="alert" id="msg" style="display: none;">
+                       
+                      </div>
+                    <label for="user_name">Username :</label>
+                    
+                    <input  type="text" name="user_name" id="u_name"><br><br>
+
+                   
+                    <label for="password">Password :</label>
+                    <input type="password" name="password" id="u_pass"><br><br><br>
+                    <input type="button" value="Login" onclick="adminlogin()" class="loginButtons"><br><br>
+                    <a href="admin_signup.html" class="_links">Create Account</a>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

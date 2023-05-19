@@ -1,0 +1,90 @@
+<head>
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+
+    
+    <script>
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('seller_username='))) {
+            // Get the value of the seller_username cookie
+            fetch('Seller_Dashboard_head.html')
+                .then(Response => Response.text())
+                .then(text => document.head.innerHTML = text);
+
+            fetch('Seller_Dashboard_body.html')
+                .then(response => response.text())
+                .then(text => {
+                    document.body.innerHTML = text;
+                    let username = document.cookie.replace(/(?:(?:^|.*;\s*)seller_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                    const options = document.querySelectorAll('.removable-active-nav');
+                    options.forEach(item => {
+                        item.classList.remove('custom-active');
+                    });
+                    document.getElementById('Listings').classList.add("custom-active");
+                    fetch('product_table.html')
+                        .then(Response => Response.text())
+                        .then(text => document.getElementById('add-product-listing').innerHTML = text);
+                    document.getElementById('s_name').innerText = 'Hi, ' + username;
+                    let u = document.getElementById('s_name').innerText;
+                    u = u.replace('Hi, ', '');
+                                let string = '';
+                                string=`
+                                <table class="table table-bordered table-responsive-sm  " style="width:600px">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                             <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+
+                                    </tbody>
+                                </table>`;
+                                const pTableDiv = document.createElement('div');
+                                pTableDiv.id = 'p-table';
+                                document.body.appendChild(pTableDiv);
+                                document.getElementById('p-table').style.marginLeft="25%";
+                                document.getElementById('p-table').innerHTML=string;
+                                string='';
+
+                    $.ajax
+                        ({
+
+                            url: 'e_com.php',
+                            type: "POST",
+                            dataType: 'JSON',
+                            data: { 'functionname': 'GetProductsForSeller', 'arguments': [u] },
+                            success: function (d) {
+                               
+                                $.each(d, function (key, value) {
+
+
+
+                                    string += `<tr>
+                                               <td>${value['product_id']}</td>
+                                               <td>${value['pname']}</td>
+                                               <td>${value['price']}</td>
+                                               
+                                               <td><button class="product-button ms-2 p-2" onclick="DisplayUpdateProductInfo('${value['product_id']}')">Update Info</button></td>
+                                               <td><button class="product-button ms-2 p-2" onclick="DeleteItem('${value['product_id']}')">Delete Item</button></td>
+
+                                              </tr>`;
+
+                                });
+
+                                $('#tableBody').append(string);
+
+                            }
+                        })
+
+
+                })
+        }
+    </script>
+</body>

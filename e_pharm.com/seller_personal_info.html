@@ -1,0 +1,107 @@
+<head>
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body>
+    
+
+<script>
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('seller_username='))) {
+        // Get the value of the seller_username cookie
+        fetch('Seller_Dashboard_head.html')
+            .then(Response => Response.text())
+            .then(text => document.head.innerHTML = text);
+
+        fetch('Seller_Dashboard_body.html')
+            .then(response => response.text())
+            .then(text => {
+                document.body.innerHTML = text;
+                let username = document.cookie.replace(/(?:(?:^|.*;\s*)seller_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                const options = document.querySelectorAll('.list-group-item');
+                    options.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('personal-info').classList.add("active");
+                document.getElementById('s_name').innerText = 'Hi, ' + username;
+                let u = document.getElementById('s_name').innerText;
+                
+                u = u.replace('Hi, ', '');
+                $.ajax({
+                    url: 'e_com.php',
+                    type: 'POST',
+                    data: { 'functionname': 'get_seller_p_info', 'arguments': [u] },
+                    success: function (d) {
+                        var data = JSON.parse(d);
+
+                        $.each(data, function (index, value) {
+                            fName = value.FName;
+                            lName = value.LName;
+                            phoneNo = value.Phone_no;
+                            gender = value.Gender;
+                            userName = value.user_name;
+                            city = value.City;
+                            country = value.Country;
+                            address = value.Address;
+                            cnicNo = value.cnic_no;
+                            dob = value.Date_of_birth;
+                            console.log(address);
+                            let string = `
+
+
+<form mehtod="post" class=" py-5 ms-5 d-flex flex-md-row flex-column justify-content-center">
+
+    <div class="  border py-0 bg-light" style="border-radius: 20px;width: 450px;">
+      <div class="bg-dark text-light w-100"
+        style="border-top-right-radius: 20px;border-top-left-radius: 20px;text-align: center;">
+        <p1 class=" py-2" style="font-size: 40px;">Update Info</p1><br><br>
+      </div>
+      <span style="">
+        <p id="msg" class="info"></p>
+      </span><br><br>
+
+      <div style="margin-left:14%">
+       
+        <i class="fa fa-clinic-medical"><input type="text" name="Fname" id="p_name" class=" py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["PharmName"]}"><br><br></i>
+
+      
+
+
+        <i class="fa-solid fa-user-tie"><input type="text" name="Owner" id="owner" class=" py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["owner_name"]}"><br><br></i>
+
+
+        <i class="fas fa-id-card"><input type="number" name="CNIC" id="_cnic" class="py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["cnic_no"]}"><br><br></i>
+
+
+        <i class="fa fa-phone" aria-hidden="true"><input type="number" name="Pnumber" id="P_num" class="py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["Phone_no"]}"><br><br></i>
+
+
+        <i class="fa-solid fa-city"><input type="text" name="_city" id="city" class="py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["City"]}"><br><br></i>
+
+        <i class="fa fa-address-card" aria-hidden="true"><input type="text" name="_address" id="address" class="py-1 px-2 input-fields" style="font-family: sans-serif;" value="${value["Address"]}"><br><br></i>
+
+
+        <div style="  float:right;margin-right:  45%;">
+          <input type="button" value="Update" onclick="update_seller_info()" class="signupButtons p-3" style="background-color: black;"><br><br>
+
+        </div>
+      </div>
+
+    </div>
+ </form>   
+
+
+`;
+                            document.getElementById('sidebar-switching').innerHTML = string;
+                        });
+
+                    }
+                })
+            })
+    }
+</script>
+
+</body>

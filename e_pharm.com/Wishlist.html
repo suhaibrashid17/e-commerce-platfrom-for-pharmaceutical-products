@@ -1,0 +1,85 @@
+<head>
+
+    <script src="jquery.js"></script>
+    <script src="e_com.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+</head>
+
+<body>
+
+
+
+    <script>
+
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('buyer_username='))) {
+            // Get the value of the seller_username cookie
+            fetch('Buyer_Dashboard_head.html')
+                .then(Response => Response.text())
+                .then(text => document.head.innerHTML = text);
+
+            fetch('Buyer_Dashboard_body.html')
+                .then(response => response.text())
+                .then(text => {
+                    document.body.innerHTML = text;
+                    let username = document.cookie.replace(/(?:(?:^|.*;\s*)buyer_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                    const options = document.querySelectorAll('.list-group-item');
+                    options.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('Wishlist').classList.add("active");
+                    document.getElementById('s_name').innerText = 'Hi, ' + username;
+                    document.getElementById('buyer-search-bar').style.display = "none";
+                    document.getElementById('filter-div').style.display = "none";
+
+                    document.getElementById('sidebar-switching').innerHTML = `
+     <table class="table table-bordered table-striped ms-3">
+     <thead>
+     <tr>
+       <th scope="col"></th>
+       <th scope="col">Product</th>
+       <th scope="col">Price</th>
+       <th scope="col">Category</th>
+     </tr>
+     </thead>
+     <tbody id="wishlist-body">
+     </tbody>
+     `;
+                    let u = document.getElementById('s_name').innerText;
+                    u = u.replace('Hi, ', '');
+                    $.ajax
+                        ({
+
+                            url: 'e_com.php',
+                            type: "POST",
+                            dataType: 'JSON',
+                            data: { 'functionname': 'GetProductsForWishlist', 'arguments': [u] },
+                            success: function (d) {
+                                let string = '';
+                                console.log(d);
+                                $.each(d, function (key, value) {
+
+                                    string += `
+                <tr onclick="displayProductDetails('${value['product_id']}')">
+                <td style="width:13%; height:13%"><img src="site-images/${value["username"]}${value["product_id"]}.png" alt="img"  class="p-0 img-fluid"  ></td>
+                 <td>${value['pname']}</td>
+                 <td>${value['price']}</td>
+                 <td>${value['category']}</td>
+                 </tr>
+               
+                 `;
+
+                                });
+
+                                $('#wishlist-body').append(string);
+
+                            }
+                        })
+                });
+
+        }
+        else
+        {
+            window.location.href='dashboard.html'
+        }
+    </script>
+</body>

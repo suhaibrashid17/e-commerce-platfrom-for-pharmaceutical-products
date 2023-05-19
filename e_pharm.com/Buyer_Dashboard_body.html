@@ -1,0 +1,104 @@
+
+<div class="mb-4">
+<nav class="navbar navbar-dark bg-dark d-flex flex-row fixed-top mb-3">
+
+    <img src="site-images/logo.png" alt="center" class="logo ml-auto">
+        <div class="mt-3 input-group input-group-sm mb-3 ms-auto" style="width:20vw" id="buyer-search-bar">
+            <input type="text" class="form-control" id="product-search" required>
+
+            <button class="btn btn-primary" type="button" onclick="displayProductsToBuyer(0)">Search</button>
+
+        </div>
+
+        <div class="btn-group dropstart" id="filter-div">
+            <button type="button" class=" ms-3 ml-3 btn btn-primary dropdown-toggle dropdown-dark bg-dark "
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa-solid fa-filter"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-dark ">
+                <a class="dropdown-item " onclick="displayProductsToBuyer(1)">Price<i class="fa-solid fa-arrow-up px-3"></i></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item "  onclick="displayProductsToBuyer(2)">Price<i class="fa-solid fa-arrow-down px-3"></i></a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+
+        <div class="btn-group dropstart" onclick="displaycart()">
+            <button type="button" class=" ms-3 ml-3 btn btn-primary dropdown-toggle dropdown-dark bg-dark"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="fa fa-shopping-cart"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-dark " id="cart">
+
+
+            </div>
+        </div>
+    
+</nav>
+</div>
+<div class="d-flex flex-row" >
+    <div class="p-0">
+        <div class="sidebar_ fixed-top" style=" height:100%;padding-top: 5.3%;">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color: black;"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarText">
+
+                    <ul class=" list-group list-group-flush list-group-color">
+                        <li class=" list-group-item">
+
+                            <p id="s_name" class="nav-link" style="color:white;font-weight: normal;font-size: 20px;">
+                                Person's Name</p>
+                        </li>
+                        <li id="Home" class="list-group-item active">
+                            <a class="nav-link" href="#" style="color:white;"
+                                onclick="Make_Active_Buyer_Interface('Home')"><span class="fa fa-dashboard  me-2"></span> Dashboard </a>
+                        </li>
+                        <li id="personal-info" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="Make_Active_Buyer_Interface('personal-info')"><span class="fa fa-user me-2"></span> Personal
+                                Info </span></a>
+                        </li>
+                        <li id="Wishlist" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="Make_Active_Buyer_Interface('Wishlist')"><span class="fa-solid fa-heart me-2"></span> WishList</a>
+                        </li>
+                        <li id="Track-Orders" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="Make_Active_Buyer_Interface('Track-Orders')"><span class="fas fa-box me-2"></span> Track Orders</a>
+                        </li>
+                        <li id="completed-orders" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="Make_Active_Buyer_Interface('completed-orders')"><span class="fa-solid fa-check me-2"></span> Completed Orders</a>
+                        </li>
+                       
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                  
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item" onclick="DeleteBuyerLoginCookie()">
+                            <a class="nav-link" style="color:white" onclick="DeleteBuyerLoginCookie()"><span class="fa fa-sign-out me-2"></span> Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <div id="sidebar-switching" class="d-flex flex-column" style="padding-top: 6%;padding-left: 18%;">
+        <div class=" d-flex flex-column p-3 " id="product-display">
+        </div>
+    </div>
+</div>

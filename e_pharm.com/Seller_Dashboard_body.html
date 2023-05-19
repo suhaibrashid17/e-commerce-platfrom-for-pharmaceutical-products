@@ -1,0 +1,128 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <img src="site-images/logo.png" alt="center" class="logo">
+</nav>
+<div class="d-flex flex-row ">
+    <div class="p-0">
+        <div class="sidebar_ fixed-top" style=" height:100%;padding-top: 5.3%;;">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: black;"></span>
+            </button>
+                <div class="collapse navbar-collapse " id="navbarText">
+
+                    <ul class=" list-group list-group-flush list-group-color">
+                        <li class=" list-group-item">
+
+                            <p id="s_name" class="nav-link" style="color:white;font-weight: normal;font-size: 20px;">
+                                Person's Name</p>
+                        </li>
+                        <li id="Home" class=" list-group-item active">
+                            <a class="nav-link" href="#" style="color:white" onclick="MakeActive('Home')"><span class="fa fa-dashboard  me-2"></span> Dashboard</a>
+                        </li>
+                        <li id="personal-info" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="MakeActive('personal-info')"><span class="fa fa-user me-2"></span> Personal
+                                Info</a>
+                        </li>
+                        <li id="active-orders" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="MakeActive('active-orders')"><span class="fa fa-tasks me-2"></span> Active Orders</a>
+                        </li>
+                        <li id="completed-orders" class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"
+                                onclick="MakeActive('completed-orders')"><span class="fa-solid fa-check me-2"></span> Completed Orders</a>
+                        </li>
+                       
+                        <li class=" list-group-item">
+                            <a class="nav-link mt-3" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                      
+
+                        
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item">
+                            <a class="nav-link" href="#" style="color:white"></a>
+                        </li>
+                        <li class=" list-group-item" onclick="DeleteSellerLoginCookie()">
+                            <a class="nav-link" style="color:white" onclick="DeleteSellerLoginCookie()"><span class="fa fa-sign-out me-2"></span> Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <div id="sidebar-switching" class="d-flex flex-column" style="padding-top: 5%;padding-left: 17%;">
+        <div class="py-5 ml-custom">
+            <nav class="navbar navbar-expand navbar-light bg-light">
+                <ul class="navbar-nav ">
+                    <li id="Add-Product" class="custom-active removable-active-nav">
+                        <a class="nav-link" href="#" onclick="MakeActiveNav('Add-Product')">Add Product</a>
+                    </li>
+                    <li id="Listings" class="removable-active-nav">
+                        <a class="nav-link" href="#" onclick="MakeActiveNav('Listings')">Listings</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="add-product-listing" class="py-3 ml-custom">
+            <form mehtod="post" class="d-flex flex-md-row flex-column justify-content-center" enctype="multipart/form-data">
+
+                <div class="p-2 mr-auto">
+                    <label for="Pname">Product Name:</label>
+                    <input type="text" name="Pname" id="p_name"><br><br>
+
+
+                    <label for="Price">Price : </label>
+
+                    <input type="number" name="Price" id="price" value="Rs."><br><br>
+                   
+
+                    <label for="Description">Description :</label>
+                    <input type="text" name="Description" id="desc"><br><br>
+                   
+         
+
+                   
+
+                </div>
+
+                <div class="p-2">
+                    
+                    <label for="Inventory">Items in Stock: </label>
+                    <input type="text" name="Inventory" id="inventory"><br><br>
+                    <label for="image">Add Image :</label>
+                    <input type="file" name="image" id="img" accept="image/*"><br><br>
+                    <label for="Category ">Category :</label>
+                    <select id="category">
+                        <option >Prescription medications</option>
+                        <option >Over-the-counter (OTC) medications</option>
+                        <option >Vitamins and supplements</option>
+                        <option >Personal care products</option>
+                        <option >Medical equipment</option>
+                        <option >First aid supplies</option>
+                        <option >Home health care products</option>
+                        <option >Baby and child care products</option>
+                        <option >Pet health products</option>
+                        <option >Health and wellness products</option>
+                      </select>
+
+                </div>
+
+            </form>
+            <input type="button" value="Add Product" onclick="AddProducttoStore()" class="product-button"><br><br>
+            <p id="msg" class="info"></p>
+
+        </div>
+    </div>
+</div>

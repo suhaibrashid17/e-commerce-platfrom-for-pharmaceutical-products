@@ -1,0 +1,63 @@
+<div class="py-5 ml-custom">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <ul class="navbar-nav ">
+            <li id="Add-Product" class="custom-active removable-active-nav">
+                <a class="nav-link" href="#" onclick="MakeActiveNav('Add-Product')">Add Product</a>
+            </li>
+            <li id="Listings" class="removable-active-nav">
+                <a class="nav-link" href="#" onclick="MakeActiveNav('Listings')">Listings</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div id="add-product-listing" class="py-3 ml-custom">
+    <form mehtod="post" class="d-flex flex-md-row flex-column justify-content-center">
+
+        <div class="p-2 mr-auto">
+            <label for="Pname">Product Name:</label>
+            <input type="text" name="Pname" id="p_name"><br><br>
+
+
+            <label for="Price">Price : </label>
+
+            <input type="number" name="Price" id="price" value="Rs."><br><br>
+
+          
+
+            <label for="Description">Description :</label>
+            <input type="text" name="Description" id="desc"><br><br>
+
+
+
+
+
+        </div>
+
+        <div class="p-2">
+            
+            <label for="Inventory">Items in Stock: </label>
+            <input type="text" name="Inventory" id="inventory"><br><br>
+            <label for="image">Add Image :</label>
+            <input type="file" name="image" id="img"><br><br>
+            
+            <label for="Category ">Category :</label>
+            <select id="category">
+                <option >Prescription medications</option>
+                <option >Over-the-counter (OTC) medications</option>
+                <option >Vitamins and supplements</option>
+                <option >Personal care products</option>
+                <option >Medical equipment</option>
+                <option >First aid supplies</option>
+                <option >Home health care products</option>
+                <option >Baby and child care products</option>
+                <option >Pet health products</option>
+                <option >Health and wellness products</option>
+              </select>
+
+        </div>
+
+    </form>
+    <input type="button" value="Add Product" onclick="AddProducttoStore()" class="product-button"><br><br>
+    <p id="msg" class="info"></p>
+
+</div>

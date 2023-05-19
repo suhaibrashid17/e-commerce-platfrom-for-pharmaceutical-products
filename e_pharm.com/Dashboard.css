@@ -1,0 +1,115 @@
+.list-group-color .list-group-item{
+    color:black;
+    background-color:#212529;
+}
+.list-group-item:hover
+{
+    opacity: 0.7;
+    
+}
+.navbar{
+    padding-top:0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+}
+@media (min-width: 992px) {
+    .sidebar_ {
+      width: 40vh;
+    }
+  }
+  @media (max-width: 991px) {
+    .sidebar_ {
+      width: 15vh;
+    }
+  }
+
+.ml-custom
+{
+   margin-left:40px !important ;
+}
+.custom-active
+{
+    background-color: lightblue;
+}
+.product-button
+{
+    background-color: seagreen;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 2.5%;
+}
+.product-button:hover {
+    opacity: 0.7;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.product-hover-1:hover
+{
+  cursor: pointer;
+  
+
+ 
+ 
+  transition: 0.2s;
+
+}
+ .product-hover-2:hover
+{
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: 0.2s;
+
+ }
+ .product-hover-3:hover
+{
+  cursor: pointer;
+  
+  
+  font-weight: bold;
+
+  border-radius: 25px;
+  transition: 0.2s;
+ }
+ #shipping-address {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+  width:300px;
+}
+.input-fields{
+  
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: black;
+    width:300px;
+  
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 70%;
+  transform: translateY(-50%);
+  z-index: 1;
+  margin-top: 4%;
+}
+
+.carousel-control-prev {
+  left: 0;
+  padding-right: 20px;
+}
+
+.carousel-control-next {
+  right: 0;
+  padding-left: 20px;
+}
+@media only screen and (min-width: 1024px) {
+  .checkout-stuff {
+    margin: 0 10%; /* 10% margin on left and right */
+  }
+}

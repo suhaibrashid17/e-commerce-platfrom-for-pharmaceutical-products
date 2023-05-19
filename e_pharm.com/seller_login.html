@@ -1,0 +1,49 @@
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark navigationBars ">
+        <img src="site-images/logo.png" alt="center" class="logo">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="front_page.html">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="About-us.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Seller's Terminal</h1>
+    <br><br>
+    <div class="d-flex flex-md-row flex-column justify-content-evenly">
+        <div class="mr-auto p-2" style="row-gap: 5px;">
+            <img src="site-images/seller.jpg" style="max-width: 22.1rem;">
+        </div>
+        <div class="p-2">
+            <p>Sign in</p>
+            <div class="justify-content-xs-center">
+                <form mehtod="post">
+                    <div class="alert alert-danger " role="alert" id="msg" style="display: none;">
+                       
+                    </div>
+                    <label for="user_name">Username :</label>
+                    <input type="text" name="user_name" id="u_name"><br><br>
+                    <label for="password">Password :</label>
+                    <input type="password" name="password" id="u_pass"><br><br><br>
+                    <input type="button" value="Login" onclick="sellerlogin()" class="loginButtons"><br><br>
+                    <a href="seller_signup.html" class="_links">I don't have an account</a>
+                    
+
+                </form>
+            </div>
+
+        </div>
+    </div>

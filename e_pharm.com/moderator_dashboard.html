@@ -1,0 +1,206 @@
+<head>
+    <title>Moderator Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="e_com.css">
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="fontawesome-free-6.3.0-web/css/all.css">
+
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body id="body">
+
+    <script>
+        let string = '';
+
+        string = `<div class="mb-4">
+        <nav class="navbar navbar-dark bg-dark d-flex flex-row fixed-top mb-3">
+
+            <img src="site-images/logo.png" alt="center" class="logo ml-auto">
+
+
+        </nav>
+    </div>
+    <div class="d-flex flex-row">
+        <div class="p-0">
+            <div class="sidebar_ fixed-top" style=" height:100%;padding-top: 5.3%;">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <button class="navbar-toggler mt-4" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon" style="color: black;"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarText">
+
+                        <ul class=" list-group list-group-flush list-group-color">
+                            <li class=" list-group-item">
+
+                                <p id="s_name" class="nav-link"
+                                    style="color:white;font-weight: normal;font-size: 20px;">
+                                    Person's Name</p>
+                            </li>
+                            <li id="bad-reviews" class="list-group-item active">
+                                <a class="nav-link" href="#" style="color:white;"
+                                    onclick="Make_Active_Moderator('bad-reviews')">Bad Reviews </a>
+                            </li>
+                            <li id="customer-queries" class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"
+                                    onclick="Make_Active_Moderator('customer-queries')"> Customer Queries </span></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item">
+                                <a class="nav-link" href="#" style="color:white"></a>
+                            </li>
+                            <li class=" list-group-item" onclick="DeleteAdminLoginCookie()">
+                                <a class="nav-link" style="color:white" onclick="DeleteAdminLoginCookie()"><span
+                                        class="fa fa-sign-out me-2"></span> Logout</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+        <div id="sidebar-switching" class="d-flex flex-column" style="padding-top: 6%;padding-left: 18%;">
+            <div class=" d-flex flex-column p-3 " id="product-display">
+            </div>
+        </div>
+    </div>`;
+
+
+        document.getElementById('body').innerHTML = string;
+
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('admin_username='))) {
+            // Get the value of the seller_username cookie
+
+            let username = document.cookie.replace(/(?:(?:^|.*;\s*)admin_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+            // Update the seller's name on the page
+            document.getElementById('s_name').innerText = 'Hi, ' + username;
+            const options = document.querySelectorAll('.list-group-item');
+            options.forEach(item => {
+                item.classList.remove('active');
+            });
+            document.getElementById('bad-reviews').classList.add("active");
+            let string = '';
+            string = `
+                                <table class="table table-bordered table-responsive-sm  " style="width:600px">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Pharmacy</th>
+                                            <th scope="col">Owner </th>
+                                            <th>City</th>
+                                            <th>Reviews</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+
+                                    </tbody>
+                                </table>`;
+            const pTableDiv = document.createElement('div');
+            pTableDiv.id = 'p-table';
+            document.body.appendChild(pTableDiv);
+            document.getElementById('p-table').style.marginLeft = "25%";
+
+
+            document.getElementById('p-table').innerHTML = string;
+            string = '';
+
+
+            $.ajax({
+                url: 'e_com.php',
+                type: 'POST',
+                dataType: 'JSON',
+                data: { 'functionname': 'GetBadSellerReviews', 'arguments': [username] },
+                success: function (d) {
+
+                    $.each(d, function (key, value) {
+                        string += `
+                        <tr>
+                          <td>${value["PharmName"]}</td>
+                          <td>${value["owner_name"]}</td>
+                          <td>${value["City"]}</td>
+                          <td>${value["avg"]}</td>
+                          
+                          <td><input type="button" id="${value["user_name"]}"  value="Ban Request" class="product-button p-3" onclick="DisplaySubmitBanRequest('${value["user_name"]}')"></td>
+                         </tr>
+                        
+                        `;
+                        //make the function specified above.
+                        $('#tableBody').append(string);
+
+                        string = '';
+                        $.ajax({
+                            url: 'e_com.php',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { 'functionname': 'GetAccountStatus', 'arguments': [value["user_name"]] },
+                            success: function (d) {
+                                
+                                    if(d[0]["account_status"]==2)
+                                    {
+                                        document.getElementById(value["user_name"]).value="Banned";
+                                        document.getElementById(value["user_name"]).style.backgroundColor='red';
+                                        document.getElementById(value["user_name"]).disabled=true;
+                                    }
+                                    if(d[0]["account_status"]==1)
+                                    {
+                                        
+
+                                        document.getElementById(value["user_name"]).value="Request Submitted";
+                                        document.getElementById(value["user_name"]).style.backgroundColor='gray';
+                                        document.getElementById(value["user_name"]).disabled=true;
+                                    }
+                                  
+                            }
+                        })
+
+                    });
+
+                }
+            })
+
+
+
+
+
+
+
+
+        }
+        else {
+            window.location.href = 'admin_signin.html';
+        }
+    </script>
+</body>

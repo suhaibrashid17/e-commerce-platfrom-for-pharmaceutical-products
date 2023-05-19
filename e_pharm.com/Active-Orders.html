@@ -1,0 +1,89 @@
+<head>
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body>
+    
+
+<script>
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('seller_username='))) {
+        // Get the value of the seller_username cookie
+        fetch('Seller_Dashboard_head.html')
+            .then(Response => Response.text())
+            .then(text => document.head.innerHTML = text);
+
+        fetch('Seller_Dashboard_body.html')
+            .then(response => response.text())
+            .then(text => {
+                document.body.innerHTML = text;
+                let username = document.cookie.replace(/(?:(?:^|.*;\s*)seller_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                const options = document.querySelectorAll('.list-group-item');
+                    options.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('active-orders').classList.add("active");
+                document.getElementById('s_name').innerText = 'Hi, ' + username;
+                let u = document.getElementById('s_name').innerText;
+                
+                u = u.replace('Hi, ', '');
+                document.getElementById('sidebar-switching').innerHTML='';
+
+                let string = '';
+                                string=`
+                                <table class="table table-bordered table-responsive-sm mt-5 " style="width:85%">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th scope="col">Product Name</th>
+                                            <th> Quantity</th>
+                                            <th>Delivery Address</th>
+                                            <th>Payment Method</th>
+                                            <th>Buyer</th>
+                                            <th> </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+
+                                    </tbody>
+                                </table>`;
+                                const pTableDiv = document.createElement('div');
+                                pTableDiv.id = 'p-table';
+                                document.body.appendChild(pTableDiv);
+                                document.getElementById('p-table').style.marginLeft="25%";
+                                document.getElementById('p-table').innerHTML=string;
+                                string='';
+
+
+                $.ajax({
+                    url: 'e_com.php',
+                    type: 'POST',
+                    dataType:'JSON',
+                    data: { 'functionname': 'get_active_orders', 'arguments': [u] },
+                    success: function (d) {
+                        $.each(d, function (key, value) {
+                                   string+= `
+                                   <tr>
+                                     <td>${value["pname"]}</td>
+                                     <td>${value["quantity"]}</td>
+                                     <td>${value["delivery_Address"]}</td>
+                                     <td>${value["payment_method"]}</td>
+                                     <td>${value["buyer_username"]}</td>
+                                     <td><button class="product-button p-2" style="font-size:12px" onclick="DisplayAddRiderDetails('${value["orderId"]}')">Mark Delivered</button></td>
+
+                                    </tr>
+                                   
+                                   `;
+                                                                     
+                            });
+                            $('#tableBody').append(string);
+                    }
+                })
+            })
+    }
+</script>
+
+</body>

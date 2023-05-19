@@ -1,0 +1,123 @@
+<head>
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body>
+
+
+    <script>
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('buyer_username='))) {
+            // Get the value of the seller_username cookie
+            fetch('Buyer_Dashboard_head.html')
+                .then(Response => Response.text())
+                .then(text => document.head.innerHTML = text);
+
+            fetch('Buyer_Dashboard_body.html')
+                .then(response => response.text())
+                .then(text => {
+                    document.body.innerHTML = text;
+                    let username = document.cookie.replace(/(?:(?:^|.*;\s*)buyer_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                    const options = document.querySelectorAll('.list-group-item');
+                    options.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('personal-info').classList.add("active");
+
+                    document.getElementById('s_name').innerText = 'Hi, ' + username;
+                    document.getElementById('buyer-search-bar').style.display = "none";
+                    document.getElementById('filter-div').style.display = "none";
+                    let u = document.getElementById('s_name').innerText;
+
+
+                    u = u.replace('Hi, ', '');
+
+                    $.ajax({
+                        url: 'e_com.php',
+                        type: 'POST',
+                        data: { 'functionname': 'get_buyer_p_info', 'arguments': [u] },
+                        success: function (d) {
+                            var data = JSON.parse(d);
+
+                            $.each(data, function (index, value) {
+                                fName = value.FName;
+                                lName = value.LName;
+                                phoneNo = value.PhoneNo;
+                                gender = value.Gender;
+                                city = value.City;
+                                country = value.Country;
+                                address = value.Address;
+                                cnicNo = value.CNIC;
+                                dob = value.Date_of_birth;
+                                console.log(address);
+                                let string = `
+
+                                <span class="alert" style="float:right;margin-right: 47%;">
+<p id="msg" class="info"></p>
+</span>
+<form mehtod="post" class=" py-2 ms-5 d-flex flex-md-row flex-column justify-content-center">
+    
+<div class="p-2 mr-auto">
+
+<label for="Fname">First Name:</label>
+<input type="text" name="Fname" id="f_name" value="${fName}"><br><br>
+
+
+<label for="Pnumber">Phone no: </label>
+
+<input type="number" name="Pnumber" id="P_num" value="${phoneNo}"><br><br>
+
+<label for="dob">Date of Birth :</label>
+<input type="date" name="dob" id="_dob" value="${dob}"><br><br>
+
+<label for="_city">City:</label>
+<input type="text" name="_city" id="city" value="${city}"><br><br>
+
+<label for="_gender">Gender:</label>
+<select id="gender" name="_gender" value="${gender}">
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+<option value="Rather not say">Rather not say</option>
+</select><br><br>
+
+
+
+</div>
+
+<div class="p-2">
+<label for="Lname">Last Name: </label>
+<input type="text" name="Lname" id="l_name" value="${lName}"><br><br>
+
+<label for="CNIC">CNIC: </label>
+<input type="number" name="CNIC" id="_cnic" value="${cnicNo}"><br><br>
+
+
+<label for="_address">Address:</label>
+<input type="text" name="_address" id="address" value="${address}"><br><br>
+ 
+</div>
+
+</form>
+<div style="  float:right;margin-right:  55%;">
+<input type="button" value="Update Info" onclick="UpdateBuyerInfo('${u}')" class="product-button ms-5"><br><br>
+
+</div>
+
+`;
+                                document.getElementById('sidebar-switching').innerHTML = string;
+                            });
+
+                        }
+                    })
+                })
+        }
+        else
+        {
+            window.location.href='dashboard.html'
+        }
+    </script>
+
+</body>

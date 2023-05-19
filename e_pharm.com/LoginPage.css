@@ -1,0 +1,324 @@
+body{
+    font-family: "Montserrat";
+}
+#Tittle{
+
+    background-color: #39AD96;
+    color: #ffff;
+}
+
+
+
+
+
+
+h1{
+
+    font-family: "Montserrat";
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+h2{
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.5;
+}
+
+h3{
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+p{
+    color: #8f8f8f;
+
+}
+
+.container-fluid{
+    padding: 3% 15%;
+
+}
+
+/* #LandingImage{
+    background: url(images/BackGround1.jpg) no-repeat ;
+    display: table;
+    margin: auto;
+    min-height: 100vh;
+    position:fixed;
+    width: 100%;
+    background-size: cover;
+} */
+
+.GetStartedbtn{
+    margin: 5% 3% 5% 0%;
+}
+
+.DoctorImage{
+    width: 65%;
+    margin-left:  35%;
+}
+
+/* @media (min-width:900px){
+    #LandingImage{
+        background-size:cover;
+    }
+} */
+
+#Features{
+
+    padding: 7% 15%;
+}
+
+.feature-box{
+    text-align: center;
+    padding: 5%;
+}
+
+.icon{
+    color: #000;
+    margin-bottom: 1rem;
+}
+.icon:hover{
+    color: #39AD96;
+}
+
+#MedicineShow{
+
+    padding: 7% 15%;
+    text-align: center;
+    background-color: #39AD96;
+    color: #fff;
+}
+.SlideShowImage1{
+    margin: 5%;
+    width: 25%;
+    border-radius: 100%;
+}
+.Slide-Descrip{
+    text-align: center;
+    margin-top:  2%;
+    font-size: 1.2rem;
+    font-family:  "Montserrat";
+    font-weight: 300;
+    color: #fff;
+}
+
+/*-------------------------------------------- LoginPage---------------------------------------------------------- */
+
+.LoginPageBodyBuyer{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 100vh;
+    background: url(images/B.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.LoginPageBodySeller{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 100vh;
+    background: url(images/S.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.Login-Box{
+    position:relative;
+    margin-top: 9%;
+    margin-right:3% ;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    display:flex;
+    justify-content:center; 
+    align-items:center;
+    overflow: hidden;
+    transition: height .2s ease;
+}
+
+.Login-Box.active{
+    height: 540px;
+}
+
+.Login-Box .form-box.login{
+
+    transition: transform .5s ease;
+     /* .18 */
+    transform: translateX(0);
+}
+
+
+.Login-Box.active .form-box.login{
+
+    transition: none;
+    transform: translateX(-400px);
+
+}
+
+
+.Login-Box .form-box.Registration
+{
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+    /* display: none; */
+}
+
+.Login-Box.active .form-box.Registration
+{
+    transition: transform .5s ease;  
+    /* .18 */
+    transform: translateX(0);
+}
+
+.Login-Box .Close-icon{
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+
+}
+
+.Login-Box .form-box{
+    width: 100%;
+    padding: 40px;
+}
+
+.form-box h2{
+    font-size: 2em;
+    color: #162938;
+    text-align: center;
+}
+
+.Input-Box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 40px 0;
+}
+ 
+/* .Input-Box label{
+    position:relative;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: stroke;
+    transition: .5s;
+} */
+
+.Input-Box input:focus~label,
+.Input-Box input:focus~label{
+    top: -5px;
+}
+
+
+.Input-Box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+}
+
+
+.Input-Box .Input-Box-icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2rem;
+    color: #162938;
+    line-height: 57px;
+}
+
+.remember-forgot{
+    font-size: .9em;
+    color: #162938;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input{
+    accent-color: #162938;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color: #162938;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+
+.Login-btn{
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.Login-Register
+{
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.Login-Register p a{
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.Login-Register p a:hover{
+    text-decoration: underline;
+}
+.navigationBars {
+    background-color: black;
+    width:100%;
+    margin-bottom: 0;
+}
+.logo {
+    width: 150px;
+    border-radius: 70px;
+    padding: 1%;
+}

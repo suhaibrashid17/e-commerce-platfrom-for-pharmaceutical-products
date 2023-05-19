@@ -1,0 +1,107 @@
+<head>
+    <script src="e_com.js"></script>
+    <script src="jquery.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body>
+
+
+    <script>
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('seller_username='))) {
+            // Get the value of the seller_username cookie
+            fetch('Seller_Dashboard_head.html')
+                .then(Response => Response.text())
+                .then(text => document.head.innerHTML = text);
+
+            fetch('Seller_Dashboard_body.html')
+                .then(response => response.text())
+                .then(text => {
+                    document.body.innerHTML = text;
+                    let username = document.cookie.replace(/(?:(?:^|.*;\s*)seller_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+                    const options = document.querySelectorAll('.list-group-item');
+                    options.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('completed-orders').classList.add("active");
+                    document.getElementById('s_name').innerText = 'Hi, ' + username;
+                    let u = document.getElementById('s_name').innerText;
+
+                    u = u.replace('Hi, ', '');
+                    document.getElementById('sidebar-switching').innerHTML = '';
+
+                    let string = '';
+                    string = `
+                                <table class="table table-bordered table-responsive-sm mt-5 " style="width:600px">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Order ID</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Stars</th>
+                                            <th> Comments</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+
+                                    </tbody>
+                                </table>`;
+                    const pTableDiv = document.createElement('div');
+                    pTableDiv.id = 'p-table';
+                    document.body.appendChild(pTableDiv);
+                    document.getElementById('p-table').style.marginLeft = "25%";
+                    document.getElementById('p-table').innerHTML = string;
+                    string = '';
+
+                    $.ajax({
+                        url: 'e_com.php',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: { 'functionname': 'get_seller_completed_orders', 'arguments': [u] },
+                        success: function (d) {
+                            $.each(d, function (key, value) {
+                                string += `
+                                   <tr>
+                                     <td>${value["product_id"]}</td>
+                                     <td>${value["orderId"]}</td>
+                                     <td>${value["pname"]}</td>
+                                     <td id="stars${value["orderId"]}"></td>
+                                     <td id="comments${value["orderId"]}"></td>
+                                    </tr>
+                                   
+                                   `;
+
+                                $('#tableBody').append(string);
+                                let a = 'stars' + value["orderId"];
+                                let b = 'comments' + value["orderId"];
+                                if (value["review_status"] == 0) {
+                                    
+                                    document.getElementById(a).innerText = '-';
+                                    document.getElementById(b).innerText = '-';
+                                }
+                                if (value["review_status"] == 1) {
+                                    let c=value["orderId"];
+                                    $.ajax({
+                                        url: 'e_com.php',
+                                        type: 'POST',
+                                        dataType: 'JSON',
+                                        data: { 'functionname': 'get_reviews', 'arguments': [c] },
+                                        success: function (d) {
+                                                    document.getElementById(a).innerText=d[0]["stars"];
+                                                    document.getElementById(b).innerText=d[0]["comment"];                                        }
+
+                                    })
+                                }
+                                string = '';
+
+                            });
+                        }
+                    })
+                })
+        }
+    </script>
+
+</body>

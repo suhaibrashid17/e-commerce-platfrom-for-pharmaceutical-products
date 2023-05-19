@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <title>Login as Buyer</title>
+  <link rel="stylesheet" href="e_com.css">
+  <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+
+  <script src="jquery.js"></script>
+  <script src="e_com.js"></script>
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+
+<script>
+  
+
+  if (document.cookie.split(';').some((item) => item.trim().startsWith('buyer_username='))) {
+    // Get the value of the seller_username cookie
+    fetch('Buyer_Dashboard_head.html')
+      .then(Response => Response.text())
+      .then(text => document.head.innerHTML = text);
+
+    fetch('Buyer_Dashboard_body.html')
+      .then(response => response.text())
+      .then(text => {
+        document.body.innerHTML = text;
+        let username = document.cookie.replace(/(?:(?:^|.*;\s*)buyer_username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+        // Update the seller's name on the page
+        document.getElementById('s_name').innerText = 'Hi, ' + username;
+
+        const queryString = window.location.search;
+
+        // create a new URLSearchParams object with the query string
+        const params = new URLSearchParams(queryString);
+
+        // get the value of the "q" parameter
+        const searchTerm = params.get("q");
+        displayusingqueryparameters(searchTerm);
+       
+
+      });
+
+  }
+  else {
+    fetch('Buyer_Dashboard_head.html')
+      .then(Response => Response.text())
+      .then(text => document.head.innerHTML = text);
+    fetch('buyer_login.html')
+      .then(response => response.text())
+      .then(text => {
+        document.body.innerHTML = text;
+      });
+  }
+
+</script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

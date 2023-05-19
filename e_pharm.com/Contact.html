@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <title>Sign up</title>
+  <link rel="stylesheet" href="e_com.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="fontawesome-free-6.3.0-web/css/all.css">
+
+  <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+
+  <script src="e_com.js"></script>
+  <script src="jquery.js"></script>
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="background:url('');background-size: 1300px; ">
+  <nav class="navbar navbar-expand-lg navbar-dark navigationBars">
+    <img src="site-images/logo.png" alt="center" class="logo">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarText">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="front_page.html">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="About-us.html">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Contact.html">Contact</a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+
+
+
+  <form mehtod="post" class="d-flex flex-row justify-content-center mt-5">
+
+    <div class="  border py-0 bg-light mt-5" style="border-radius: 20px;width: 450px;">
+      <div class="bg-dark text-light w-100"
+        style="border-top-right-radius: 20px;border-top-left-radius: 20px;text-align: center;">
+        <p1 class=" py-2" style="font-size: 40px;">Customer Support</p1><br><br>
+      </div>
+      <span class="w-100">
+        <p id="msg" class="alert w-100" style="font-size:20px;display:none"></p>
+      </span><br><br>
+
+      <div style="margin-left:14%">
+       
+       
+
+        <i class="fa fa-user" aria-hidden="true"><input type="email" name="email" id="email" class="py-2 px-2 mb-3 input-fields" style="font-family: sans-serif;" placeholder="Email"><br><br></i>
+
+        <i class="fa fa-message" aria-hidden="true"><input type="text" name="message" id="message" class="py-2 px-2 input-fields mb-3" style="font-family: sans-serif;" placeholder="Query/Message"></i><br><br>
+
+        <div style="  float:right;margin-right:  45%;">
+          <input type="button" value="Send Message" onclick="SendMessage()" class="signupButtons p-3" style="background-color: black;"><br><br>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+
+  </div>
+
+  <br><br>
+
+
+</body>
+
+</html>

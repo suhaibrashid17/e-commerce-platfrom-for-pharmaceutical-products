@@ -1,0 +1,161 @@
+<head>
+
+    <title>Checkout</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="e_com.css">
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="fontawesome-free-6.3.0-web/css/all.css">
+    <script src="jquery.js"></script>
+    <script src="checkout.js"></script>
+
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark d-flex flex-row justify-content-">
+
+        <img src="site-images/logo.png" alt="center" class="logo ml-auto">
+
+
+    </nav>
+    <div id="order-placed" style=" margin:8%; margin-top: 11%;margin-left: 15%;display:none;">
+        <p style="font-weight: bold;font-family: 'Ubuntu', sans-serif;font-size: 30px;background-color: white;color: black;text-align: center;"><img style="width: 250px;" src="site-images/checkout.gif"  >Order Placed Successfully!</p><br><br>
+         
+    </div>
+        <div id="carouselExampleIndicators" class="carousel slide " data-bs-interval="false" data-bs-wrap="false"
+        data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+
+                <div class="d-flex flex-md-row flex-column checkout-stuff">
+
+
+
+                    <div class=" d-flex flex-column  m-5 border " id="checkout" style="border-radius: 12px;">
+                        <div class=" mb-5 text-white bg-dark px-3"
+                            style="font-size: 30px;font-weight: bold;font-family: 'Ubuntu', sans-serif;">Shopping
+                            Cart</div>
+
+                    </div>
+                    <div class="flex-column">
+                        <div class="flex-column m-5 border" style="height: 250px;">
+
+                            <div class=" mb-5 text-white bg-dark px-3"
+                                style="font-size: 30px;font-weight: bold;font-family: 'Ubuntu', sans-serif;">Shipping
+                                Address</div>
+                            <div style="width:400px">
+                                <i class="ms-3 me-2 fa fa-home"></i>
+                                <input id="shipping-address" type="text" style="width:75%;"
+                                    placeholder=" Shipping Address (optional)"><br><br>
+                                    <i class="ms-3 me-2 fa-solid fa-city"></i>    
+                                <input class="input-fields" style="width:75%" id="city" disabled><br><br>
+
+                                <input class="ms-3 me-3" onclick="PaymentChecked()" id="same-as-permanent-address" type="checkbox">
+                                <label for="same-as-permanent-address">Same as Permanent Address</label>
+                            </div>
+
+                        </div>
+                        <div class="flex-column m-5 border mb-4" style="height:280px;">
+                            <div class=" mb-5 text-white bg-dark px-3"
+                                style="font-size: 30px;font-weight: bold;font-family: 'Ubuntu', sans-serif;">Payment
+                                Method</div>
+                            <input type="checkbox" id="cod" class="ms-3 me-3" onclick="CODChecked()">
+                            <img style="width:100px;" src="site-images/cod.png" alt=""><br><br>
+                            <input type="checkbox" id="card" class="ms-3 me-3" onclick="CardChecked()">
+                            <img style="width:120px;" src="site-images/cardmethod.png" alt=""><br><br>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="carousel-item">
+
+                <div id="payment-alert" class="alert alert-danger w-75 mt-1" role="alert"
+                    style="display: none;margin-left: 13%;">
+                </div>
+                <div id="address-alert" class="alert alert-danger w-75 mt-1" role="alert"
+                    style="display: none;margin-left: 13%;">
+                </div>
+                <div id="cart-alert" class="alert alert-danger w-75 mt-1" role="alert"
+                    style="display: none;margin-left: 13%;">
+                </div>
+                <div id="credit-card-alert" class="alert alert-danger w-75 mt-1" role="alert"
+                    style="display: none;margin-left: 13%;">
+                </div>
+                <div id="reciept-table" style="display:none;margin-left:28%;margin-top:6%;margin-right: 32%;">
+                    <table class="table table-bordered">
+                        <thead class="bg-dark text-white">
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reciept">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="COD-Place-Order" style="display:none">
+                    <button class="px-3 py-3 product-button mt-2" style="margin-left: 60%;"
+                        onclick="PlaceOrderUsingCod()">Place Order</button>
+                </div>
+                <div id="Card-Place-Order" style="margin-left: 28%;margin-right: 30%;display:none;">
+                    <table class="table table-bordered " style="width:40vw">
+                        <thead class="bg-dark text-light ">
+                            <th>
+                                <div class="ms-3">
+                                    Card Details
+                                </div>
+                            </th>
+
+                        </thead>
+                        <tbody>
+                            <td>
+                                <div class="ms-3 py-3">
+                                    <img style="width:65px;" src="site-images/cardmethod.png" alt="">
+                                    <label for="">Credit/Debit Card No. : </label>
+
+                                    <input id="Card-Number" type="text" class="input-fields" style="width:37%"><br><br>
+                                    <label for="Valid-through">Valid-through : </label>
+                                    <input id="Valid-through" type="month" class="input-fields me-3" style="width:25%">
+                                    <label for="CVV">CVV : </label>
+                                    <input id="CVV" type="number" class="input-fields mb-4" style="width:25%">
+                                    <button class="product-button" style="margin-left: 65%;"
+                                        onclick="PlaceOrderUsingCard()">Place Order</button>
+                                </div>
+                            </td>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <a onclick="BackFunction()" class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+            data-bs-slide="prev">
+            <div id="prev-button-for-disapperance" style="background-color: black;padding: 20px;border-radius: 30px;">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+        </a>
+        <a onclick="ForwardFunction()" class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+            data-bs-slide="next">
+            <div id="next-button-for-disapperance" style="background-color: black;padding: 20px;border-radius: 30px;">
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </a>
+    </div>
+
+
+
+
+</body>
